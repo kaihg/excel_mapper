@@ -5,3 +5,5 @@ dist/
 excel3.xlsx
 main.spec
 input.xlsx
+.vscode/
+merge_product.csv
