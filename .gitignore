@@ -1,0 +1,6 @@
+.spyproject/
+__pycache__/
+build/
+dist/
+excel3.xlsx
+main.spec
