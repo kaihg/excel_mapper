@@ -8,7 +8,7 @@ Created on Sun May 30 23:17:33 2021
 import openpyxl
 import detailMapper
 
-file_name = 'excel3.xlsx'
+file_name = 'input.xlsx'
 default_sheet_name = 'Worksheet'
 
 mapper = detailMapper.getMapper('live')
