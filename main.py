@@ -18,7 +18,7 @@ sheet = wb[default_sheet_name]
 
 size = len(list(sheet.columns)[1])
 print(size)
-range = sheet['G2': 'I{0}'.format(size)]
+range = sheet['B2': 'I{0}'.format(size)]
 
 last_product = None
 taste_list = []
@@ -42,14 +42,17 @@ def finish_taste_session():
     return merged
 
 merged_products = []
-for name, package, detail in range:
-    print(name.value)
+others = []
+for orderNum, cartNum, receiver,address,phone, name, package, detail in range:
+    
     if name.value is not None and detail.value is not None:
         # 有口味產品 第一個選擇
         finish_taste_session()
         
         last_product = name.value
         taste_list.append(mapper.map(detail.value))
+
+        others.append(", ".join([str(orderNum.value),  receiver.value ,address.value, '"'+str(phone.value)+'"']))
     elif name.value == None and detail.value is not None:
         # 有口味產品 其他選擇
         taste_list.append(mapper.map(detail.value))
@@ -59,14 +62,20 @@ for name, package, detail in range:
         pack, count = package.value.split("*")
         merged = f"{name.value}({pack.strip()})*{count.strip()}"
         merged_products.append(merged)
+
+        others.append(", ".join([str(orderNum.value), receiver.value ,address.value, '"'+str(phone.value)+'"']))
     else:
         # 特殊空白欄，先不做事
         pass
         
 finish_taste_session()
 
-with open('merge_product.csv', 'w') as ff:
-    for p in merged_products:
-        ff.write(p)
+
+with open('merge_product.csv', 'w', encoding='utf-8') as ff:
+    ff.write('\ufeff')
+    for info, detail in zip(others, merged_products):
+        ff.write(info)
+        ff.write(", ")
+        ff.write(detail)
         ff.write('\n')
 
