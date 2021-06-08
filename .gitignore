@@ -7,3 +7,5 @@ main.spec
 input.xlsx
 .vscode/
 merge_product.csv
+output.xlsx
+test.xlsx
