@@ -28,7 +28,7 @@ while len(sheet.merged_cells.ranges) > 0 :
     for merged in sheet.merged_cells.ranges:
         # print(merged.coord)
         sheet.unmerge_cells(merged.coord)
-wb.save('test.xlsx')
+
 
 def finish_taste_session():
     global last_product, taste_list, merged_products
